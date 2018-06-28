@@ -5,6 +5,9 @@ The objective of this repository is to develop pretrained features for document 
 <img src="images/res1.png" height="250"> <img src="images/res2.png" height="250"> <img src="images/res3.png" height="250"> <img src="images/res4.png" height="250"> <img src="images/res5.png" height="250">
 
 
+[PDF paper](images/Object_detection_deep_learning_networks_for_Optical_Character_Recognition.pdf)
+
+
 ## Features
 
 - **Python 2 and Python 3 support**
