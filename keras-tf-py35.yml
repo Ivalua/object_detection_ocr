@@ -1,0 +1,14 @@
+name: keras-tf-py35
+dependencies:
+  - pip=8.1.2=py35_0
+  - python=3.5.2=0
+  - h5py
+  - hdf5
+  - pip:
+    - numpy==1.14.2
+    - scikit-image==0.13.1
+    - keras==2.1.5
+    - lxml==4.2.0
+    - opencv-python
+    - "https://storage.googleapis.com/tensorflow/linux/gpu/tensorflow_gpu-1.5.0-cp35-cp35m-linux_x86_64.whl"
+    - pytesseract

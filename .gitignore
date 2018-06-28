@@ -1,0 +1,6 @@
+*.pyc
+Graph/
+logs/
+*.npz
+datasets/ocr
+*.zip

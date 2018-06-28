@@ -1,0 +1,9 @@
+name: cntk-py35
+dependencies:
+  - pip=8.1.2=py35_0
+  - python=3.5.2=0
+  - opencv=3.1.0
+  - pip:
+    - lxml==4.2.0
+    - keras==2.1.5
+    - pytesseract

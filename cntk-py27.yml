@@ -1,0 +1,9 @@
+name: cntk-py27
+dependencies:
+  - pip=8.1.2=py27_0
+  - python=2.7.11=5
+  - opencv=3.1.0
+  - pip:
+    - lxml==4.2.0
+    - keras==2.1.5
+    - pytesseract

@@ -1,0 +1,14 @@
+name: keras-tf-py27
+dependencies:
+  - pip=8.1.2=py27_0
+  - python=2.7.11=5
+  - h5py
+  - hdf5
+  - pip:
+    - numpy==1.14.2
+    - scikit-image==0.13.1
+    - lxml==4.2.0
+    - keras==2.1.5
+    - opencv-python
+    - "https://storage.googleapis.com/tensorflow/linux/gpu/tensorflow_gpu-1.5.0-cp27-none-linux_x86_64.whl"
+    - pytesseract
