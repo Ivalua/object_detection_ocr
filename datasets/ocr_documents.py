@@ -116,11 +116,11 @@ class Dataset:
                         y1 = float(c.get(config["y1_attribute"])) * f - y_
                         x2 = float(c.get(config["x2_attribute"])) * f - x_
                         y2 = float(c.get(config["y2_attribute"])) * f - y_
-                        if (x1 < 0) or (x2 > w_) or (y1 < 0) or (y2 > h_) or ( max(x2 - x1, y2 - y1) < (layer_fields[0] - layer_strides[0]) / 2 ) or ( min(y2 - y1, x2 - x1)  <= 0.0  ):
+                        if (x1 < 0) or (x2 > w_) or (y1 < 0) or (y2 > h_) or ( min(y2 - y1, x2 - x1)  <= 0.0 ): # or ( max(x2 - x1, y2 - y1) < (layer_fields[0] - layer_strides[0]) / 2 )
                             continue
                         # discard too small chars
-                        if max(x2 - x1, y2 - y1) < 7:
-                            continue
+                        # if max(x2 - x1, y2 - y1) < 7:
+                        #     continue
                         if (c.text in self.classes):
                             groundtruth.append((i, y1, x1, y2 - y1, x2 - x1, self.classes.index(c.text)))
 

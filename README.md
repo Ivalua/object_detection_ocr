@@ -252,7 +252,7 @@ Train on lower resolution (digit resize parameter):
 | ` python train.py -e 30 -r 7-28 -s 4 -m CNN_C32_C64_C64_Cd64_C128_D --iou .2` | 99.12 | 91.01 | 0.0040 | 84.87 | 77.18 |
 | `python train.py -e 30 -r 7-28 -s 4 -m CNN_C32_C64_C64_Cd64_C128_D --iou .15` | 98.40 | 77.86 | 0.029 | 88.68 | 85.71 |
 | `python train.py -e 30 -r 7-28 -s 4 -m CNN_C32_C64_C64_Cd64_C128_D --iou .1` | 98.20 | 56.96 | 0.086 | 87.51 | 95.34 |
-| `python train.py -e 30 -r 7-28 -s 4 -m CNN_C32_C64_C64_Cd64_C128_D --iou .05` | 97.23 | 35.42 | 0.040 | 72.76 | 67.13 |
+| `python train.py -e 30 -r 7-28 -s 4 -m CNN_C32_C64_C64_Cd64_C128_D --iou .05 -lr 0.001` | 97.71 | 38.91 | 0.032 | 77.98 | 100 |
 | `python train.py -e 30 -r 7-28 -s 4 -m CNN_C32_C64_C64_Cd64_C128_D --iou .02 --lr 0.0001` | 96.79 | 18.59 | 0.10 | 77.28 | 100 |
 | `python train.py -e 30 -r 7-28 -s 3 -m CNN_C32_C64_C64_Cd64_C128_D --iou .1` | 97.47 | 73.70 | 0.010 | 87.19 | 95.45 |
 | `python train.py -e 30 -r 7-28 -s 3 -m CNN_C32_C64_C64_Cd64_C128_D --iou .2` | 99.08 | 92.84 | 0.0074 | 81.01 | 76.47 |
@@ -351,10 +351,10 @@ For OCR training on full document images:
 
 | Command | Obj acc | Class acc | Reg acc |
 | --- | --- | --- | --- |
-| `python train.py -e 50 -d ocr_documents_generator -i 2000 -s 3 -m CNN_C64_C128_M2_C128_C128_M2_C256_D_2 --iou 0.2` | S3 |   |  |
-| `python train.py -e 50 -d ocr_documents_generator --n_cpu 8 -i 1000 -s 4 -m CNN_C32_C64_C64_Cd64_C128_D --iou .15` | S3 |   |  |
-| `python train.py -e 50 -d ocr_documents_generator --n_cpu 8 -i 1000 -s 4 -m CNN_C32_C64_C128_D --iou .2` (3) | 98.49  | 69.11 | 0.0158 |
-| `python train.py -e 50 -d ocr_documents_generator --n_cpu 8 -i 1500 -s 4 -m CNN_C32_C64_C128_D --iou .2` | V1 Good |   |  |
+| `python train.py -e 50 -d ocr_documents_generator -i 2000 -r 2000 -s 3 -m CNN_C64_C128_M2_C128_C128_M2_C256_D_2 --iou 0.2` | S3 |   |  |
+| `python train.py -e 50 -d ocr_documents_generator --n_cpu 8 -i 1000 -r 1000 -s 4 -m CNN_C32_C64_C64_Cd64_C128_D --iou .15` | S3 |   |  |
+| `python train.py -e 50 -d ocr_documents_generator --n_cpu 8 -i 1000 -r 1000 -s 4 -m CNN_C32_C64_C128_D --iou .2` (3) | 98.49  | 69.11 | 0.0158 |
+| `python train.py -e 50 -d ocr_documents_generator --n_cpu 8 -i 1500 -r 1500 -s 4 -m CNN_C32_C64_C128_D --iou .2` | V1 Good |   |  |
 
 
 (3) `wget https://s3-eu-west-1.amazonaws.com/christopherbourez/public/2018-06-25_15:44_CNN_C32_C64_C128_D.h5`
