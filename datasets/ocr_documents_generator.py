@@ -10,7 +10,7 @@ from . import compute_grids, compute_grids_
 from keras.utils.data_utils import Sequence
 
 class FlowGenerator(Sequence):
-    def __init__(self, config, files, name, layer_offsets, layer_strides, layer_fields, classes, resize, target_size=(150, 150), batch_size=1, iou_treshold = .3, stride_margin= True): #rescale=1./255, shear_range=0.2, zoom_range=0.2, brightness=0.1, rotation=5.0, zoom=0.1
+    def __init__(self, config, files, name, layer_offsets, layer_strides, layer_fields, resize, classes, target_size=(150, 150), batch_size=1, iou_treshold = .3, stride_margin= True): #rescale=1./255, shear_range=0.2, zoom_range=0.2, brightness=0.1, rotation=5.0, zoom=0.1
 
         self.config = config
         self.file_path_list = files
@@ -56,9 +56,9 @@ class FlowGenerator(Sequence):
             image = image / 255.
 
             f = 1.
-            if resize != "":
-                r1 = int(resize) / image.shape[0]
-                r2 = int(resize) / image.shape[1]
+            if self.resize != "":
+                r1 = int(self.resize) / image.shape[0]
+                r2 = int(self.resize) / image.shape[1]
                 f = min(r1, r2)
                 image = cv2.resize(image, None, fx=f, fy=f, interpolation=cv2.INTER_NEAREST)
 
@@ -78,13 +78,13 @@ class FlowGenerator(Sequence):
                 else:
                     y_ = 0
                     h_ = image.shape[0]
-                chars = page.findall(".//d:" + config["char_tag"], ns)
+                chars = page.findall(".//d:" + self.config["char_tag"], ns)
                 nb_chars = 0
                 for c in chars:
-                    x1 = float(c.get(config["x1_attribute"])) * f - x_
-                    y1 = float(c.get(config["y1_attribute"])) * f - y_
-                    x2 = float(c.get(config["x2_attribute"])) * f - x_
-                    y2 = float(c.get(config["y2_attribute"])) * f - y_
+                    x1 = float(c.get(self.config["x1_attribute"])) * f - x_
+                    y1 = float(c.get(self.config["y1_attribute"])) * f - y_
+                    x2 = float(c.get(self.config["x2_attribute"])) * f - x_
+                    y2 = float(c.get(self.config["y2_attribute"])) * f - y_
                     if (x1 > 0) and (x2 < w_) and (y1 > 0) and (y2 < h_) :
                         nb_chars = nb_chars + 1
                 if nb_chars > 10:
@@ -149,12 +149,12 @@ class Dataset:
         xml_train_files = xml_all_files[0:num_train]
         xml_test_files = xml_all_files[num_train:]
 
-        self.train = FlowGenerator(config, xml_train_files, "TRAIN", layer_offsets, layer_strides, layer_fields, resize, target_size=(self.img_h, self.img_w),
-                batch_size=batch_size, classes=self.classes, iou_treshold = iou_treshold, stride_margin= self.stride_margin) #, rescale=1./255, shear_range=0.2, zoom_range=0.2
-        self.val = FlowGenerator(config, xml_test_files, "VAL", layer_offsets, layer_strides, layer_fields, resize, target_size=(self.img_h, self.img_w),
-                batch_size=batch_size, classes=self.classes, iou_treshold = iou_treshold, stride_margin= self.stride_margin) #, rescale=1./255
-        self.test = FlowGenerator(config, xml_test_files, "TEST", layer_offsets, layer_strides, layer_fields, resize, target_size=(self.img_h, self.img_w),
-                batch_size=batch_size, classes=self.classes, iou_treshold = iou_treshold, stride_margin= self.stride_margin) #, rescale=1./255
+        self.train = FlowGenerator(config, xml_train_files, "TRAIN", layer_offsets, layer_strides, layer_fields, resize, self.classes, target_size=(self.img_h, self.img_w),
+                batch_size=batch_size, iou_treshold = iou_treshold, stride_margin= self.stride_margin) #, rescale=1./255, shear_range=0.2, zoom_range=0.2
+        self.val = FlowGenerator(config, xml_test_files, "VAL", layer_offsets, layer_strides, layer_fields, resize, self.classes, target_size=(self.img_h, self.img_w),
+                batch_size=batch_size, iou_treshold = iou_treshold, stride_margin= self.stride_margin) #, rescale=1./255
+        self.test = FlowGenerator(config, xml_test_files, "TEST", layer_offsets, layer_strides, layer_fields, resize, self.classes, target_size=(self.img_h, self.img_w),
+                batch_size=batch_size, iou_treshold = iou_treshold, stride_margin= self.stride_margin) #, rescale=1./255
 
         # for compatibility
         self.gt_test = []
